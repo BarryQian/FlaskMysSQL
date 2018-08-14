@@ -11,7 +11,7 @@ def hello_world():
 @app.route('/get_list')
 def get_list():
 
-    #处理数据
+    #获取数据
     users = Stu.get_list( )
     print(users)
 
