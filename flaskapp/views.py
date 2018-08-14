@@ -5,14 +5,14 @@ from flaskapp.model.models import Stu
 
 @app.route('/')
 def hello_world():
-    return 'Hello aa '
+    return 'Hello world'
 
 
 @app.route('/get_list')
 def get_list():
 
     #获取数据
-    users = Stu.get_list( )
+    users = Stu.get_list()
     print(users)
 
     return render_template('user.html', users=users)

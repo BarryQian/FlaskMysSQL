@@ -5,7 +5,7 @@
 #models.py 实例化mysql数据库中test数据库的Stu表，并返回表内容：users到路由函数get_list()中
 #通过render_templates()渲染user.html
 #user.html是基于Bootstrap框架下的base.html模板
-
+#测试
 
 from flaskapp.__init__ import app
 
