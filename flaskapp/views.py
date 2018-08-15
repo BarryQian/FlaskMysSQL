@@ -5,7 +5,7 @@ from flaskapp.model.models import Stu
 
 @app.route('/')
 def hello_world():
-    return 'Hello world'
+    return render_template('user.html')
 
 
 @app.route('/get_list')
@@ -31,6 +31,42 @@ def add_user():
         res = userObj.add_user(username, userage)
 
         if res:
-            return render_template('ok.html')
+            # 调用数据库数据
+            users= userObj.get_list()
+            return render_template('user.html', users=users)
+
+        else:
+            return render_template('error.html')
+
+
+@app.route('/del_user/<id>')
+def del_user(id):
+    # 调用数据库获取数据（表格对象）
+    userObj = Stu()
+    # 处理数据，获得表格内容
+    #print("被删除的id:"+ str(id))
+    res = userObj.del_user(id)
+    if res:
+        # 调用数据库数据
+        users = userObj.get_list()
+        return render_template('user.html', users=users)
+    else:
+        return render_template('error.html')
+
+#更新部分错误
+@app.route('/updata', methods=['POST', 'GET'])
+def up_data():
+    if request.method == 'POST':
+        newname = request.form['newname']
+        newage = request.form['newage']
+        #调用数据库
+        userObj = Stu()
+        res = userObj.updata(newname, newage)
+
+        if res:
+            # 调用数据库数据
+            users= userObj.get_list()
+            return render_template('user.html', users=users)
+
         else:
             return render_template('error.html')
